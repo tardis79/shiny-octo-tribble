@@ -24,6 +24,33 @@ domain connection are working.
 After deployment, open your `*.vercel.app` domain. You should see
 `Connection OK`.
 
+## HTTP On Vercel
+
+Vercel does not serve production deployments over plain insecure HTTP. If you
+visit:
+
+```text
+http://your-project.vercel.app
+```
+
+Vercel will automatically redirect it to:
+
+```text
+https://your-project.vercel.app
+```
+
+That means the site still opens when someone types `http://`, but the final URL
+in the browser will be secure HTTPS.
+
+You can test that redirect after deployment with:
+
+```sh
+curl -I http://your-project.vercel.app
+```
+
+You should see a redirect status such as `308` and a `Location` header pointing
+to the HTTPS URL.
+
 ## Optional CLI Deploy
 
 ```sh

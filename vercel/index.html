@@ -160,7 +160,8 @@
       <h1>Vercel is serving this page.</h1>
       <p>
         If you can see this page on your Vercel domain, the deployment is live and the
-        domain route is reaching the project successfully.
+        domain route is reaching the project successfully. Typing an HTTP URL on Vercel
+        should still open this page after Vercel redirects it to HTTPS.
       </p>
 
       <dl>
@@ -171,6 +172,10 @@
         <div class="row">
           <dt>Protocol</dt>
           <dd id="protocol">Loading...</dd>
+        </div>
+        <div class="row">
+          <dt>HTTP URL</dt>
+          <dd id="http-behavior">Loading...</dd>
         </div>
         <div class="row">
           <dt>Checked At</dt>
@@ -189,6 +194,10 @@
       document.getElementById("host").textContent = window.location.host || "local file";
       document.getElementById("protocol").textContent =
         window.location.protocol === "file:" ? "file:// local preview" : window.location.protocol;
+      document.getElementById("http-behavior").textContent =
+        window.location.hostname.endsWith(".vercel.app") && window.location.protocol === "https:"
+          ? "OK: Vercel accepts http:// visits by redirecting them to https://"
+          : "Local preview accepts http:// directly; Vercel will redirect http:// to https://";
       document.getElementById("checked-at").textContent = now.toLocaleString(undefined, {
         dateStyle: "medium",
         timeStyle: "medium",
